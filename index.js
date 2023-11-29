@@ -85,8 +85,15 @@ window.onload = function () {
   let lineY = height / 2;
   let lineLength = 40;
   let line = new Line(lineY, lineLength);
-  let sample = new Particle(10, width / 2, height / 2);
-  let isMouseDown = true;
+  let particleSystem = new ParticleSystem();
+  // const particleSystem = new ParticleSystem(width, height);
+  let isMouseDown = false;
+
+  // Emit a particle initially at the center
+  // particleSystem.emitParticle(10, width / 2, height / 2, 0, 0);
+  // const initialBullet = new Particle(10, width / 2, height / 2);
+  // particleSystem.particles.push(initialBullet);
+  // particleSystem.emitParticle(context, width, height, 10, 0, 0);
 
   update();
 
@@ -94,11 +101,12 @@ window.onload = function () {
     context.clearRect(0, 0, width, height);
     line.update(mouseX, mouseY);
 
-    sample.update();
+    // Draw the particle system
+    particleSystem.draw(context);
 
-    if (isMouseDown) {
-      sample.draw(context);
-    }
+    // Update the particle system
+    particleSystem.update(width, height);
+
     line.draw(context);
 
     requestAnimationFrame(update);
@@ -110,18 +118,21 @@ window.onload = function () {
   });
 
   window.addEventListener("mousedown", function (event) {
-    // Reset particle position to the center
-    sample.position.setX(width / 2);
-    sample.position.setY(height / 2);
-
+    // Emit a particle from the particle system towards the mouse click
     const angle = Math.atan2(
-      event.clientY - sample.position.getY(),
-      event.clientX - sample.position.getX()
+      event.clientY - height / 2,
+      event.clientX - width / 2
     );
     const speed = 100;
-    sample.velocity.setAngle(angle).setMagnitude(speed);
+    particleSystem.emitParticle(10, width / 2, height / 2, Math.cos(angle) * speed, Math.sin(angle) * speed);
+
     isMouseDown = true;
   });
+  // window.addEventListener('mousedown', function () {
+  //   // Set the mouse click flag to true
+  //   particleSystem.isMouseDown = true;
+  // });
+
 
   window.addEventListener("mouseup", function () {
     isMouseDown = false;
