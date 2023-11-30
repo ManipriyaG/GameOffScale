@@ -1,7 +1,6 @@
 class ParticleSystem {
     constructor() {
       this.particles = [];
-    //   this.emitParticle(10, window.innerWidth / 2, window.innerHeight / 2, 0, 0);
     }
   
     emitParticle(radius, initialX, initialY, initialVelocityX, initialVelocityY) {
@@ -12,11 +11,9 @@ class ParticleSystem {
     }
 
     update(width, height) {
-        // this.emitParticle(10, window.innerWidth / 2, window.innerHeight / 2, 0, 0);
         for (let i = this.particles.length - 1; i >= 0; i--) {
           const particle = this.particles[i];
           particle.update();
-    
           // Remove particles that hit canvas boundaries or slow down
           if (
             particle.position.getX() < 0 ||
