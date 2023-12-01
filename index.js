@@ -240,51 +240,13 @@ window.onload = function () {
     mouseY = event.clientY;
   });
 
-  // window.addEventListener("mousedown", function (event) {
-  //   const angle = Math.atan2(
-  //     event.clientY - height / 2,
-  //     event.clientX - width / 2
-  //   );
-  //   const speed = 50;
-  //   particleSystem.emitParticle(4, width / 2, height / 2, Math.cos(angle) * speed, Math.sin(angle) * speed);
-  // });
-  // window.addEventListener("mousedown", function (event) {
-  //   const angle = Math.atan2(
-  //     event.clientY - height / 2,
-  //     event.clientX - width / 2
-  //   );
-
-  //   // Emit particle (bullet) from the selected gun
-  //   particleSystem.emitParticle(
-  //     guns[currentGun - 1].bulletSize,
-  //     width / 2,
-  //     height / 2,
-  //     Math.cos(angle) * guns[currentGun - 1].speed,
-  //     Math.sin(angle) * guns[currentGun - 1].speed
-  //   );
-  // });
+  
   window.addEventListener("keydown", function (event) {
     if (event.key === "1" || event.key === "2") {
       currentGun = parseInt(event.key);
     }
   });
-  // window.addEventListener("mousedown", function (event) {
-  //   const angle = Math.atan2(
-  //     event.clientY - height / 2,
-  //     event.clientX - width / 2
-  //   );
   
-  //   // Emit particle (bullet) from the selected gun
-  //   const gunPosition = currentGun === 1 ? { x: width / 2 - 50, y: height / 2 } : { x: width / 2 + 50, y: height / 2 };
-  
-  //   particleSystem.emitParticle(
-  //     guns[currentGun - 1].bulletSize,
-  //     gunPosition.x,
-  //     gunPosition.y,
-  //     Math.cos(angle) * guns[currentGun - 1].speed,
-  //     Math.sin(angle) * guns[currentGun - 1].speed
-  //   );
-  // });
   window.addEventListener("mousedown", function (event) {
     const angle = Math.atan2(
       event.clientY - height / 2,
