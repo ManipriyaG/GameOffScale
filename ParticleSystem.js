@@ -14,6 +14,9 @@ class ParticleSystem {
         for (let i = this.particles.length - 1; i >= 0; i--) {
           const particle = this.particles[i];
           particle.update();
+          if (particle.isExpired()) {
+            this.particles.splice(i, 1);
+          }
           // Remove particles that hit canvas boundaries or slow down
           if (
             particle.position.getX() < 0 ||
