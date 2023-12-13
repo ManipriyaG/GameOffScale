@@ -347,16 +347,17 @@
 //     isMouseDown = false;
 //   });
 // };
-
 let currentGun = 1; // Initial gun
 const guns = [
   { speed: 50, bulletSize: 10 }, // Gun 1 properties
   { speed: 30, bulletSize: 6 }  // Gun 2 properties
 ];
 window.onload = function () {
+  // this.image.onload = function () {
   let canvas = document.getElementById("canvas");
   let context = canvas.getContext("2d");
-  let width = (canvas.width = window.innerWidth);
+  
+let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
   let mouseX = 0;
   let mouseY = 0;
@@ -365,7 +366,13 @@ window.onload = function () {
   let line = new Line(lineY, lineLength);
   let particleSystem = new ParticleSystem();
   let enemySystem = new EnemySystem();
-  const player = new Player(50, 50, "yellow", width, height);
+  const spawnConfigurations = [
+    { initialX: 100, initialY: 100, targetX: width / 2, targetY: height / 2, numberOfEnemies: 3, spawnInterval: 1000 },
+  ];
+  const enemySpawner = new EnemySpawning(enemySystem, spawnConfigurations);
+  const playerImage = "./assets/player.png";
+  const player = new Player(50, 50, playerImage, width, height);
+  // const player = new Player(50, 50, "yellow", width, height);
   const gun1 = new Gun(width / 2 - 25, height / 2, guns[0].speed, guns[0].bulletSize, "green");
 const gun2 = new Gun(width / 2 + 25, height / 2, guns[1].speed, guns[1].bulletSize, "blue");
 
@@ -394,7 +401,8 @@ const gun2 = new Gun(width / 2 + 25, height / 2, guns[1].speed, guns[1].bulletSi
     CollisionSystem.checkCollisions(particleSystem, enemySystem);
     
   // Spawn enemies at a specific location, time, and number
-  enemySystem.spawnEnemies(100, 100, width / 2, height / 2, 3)
+  // enemySystem.spawnEnemies(100, 100, width / 2, height / 2, 3)
+  enemySpawner.update();
     requestAnimationFrame(update);
   }
 
