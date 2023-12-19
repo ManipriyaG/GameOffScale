@@ -1,0 +1,17 @@
+[
+  { "initialX": 100, "initialY": 100, "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 2, "spawnInterval": 1000 },
+  { "initialX": "width - 100", "initialY": "height / 2", "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 1, "spawnInterval": 1000 },
+  { "initialX": 200, "initialY": 300, "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 2, "spawnInterval": 2000 },
+  { "initialX": 100, "initialY": 100, "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 1, "spawnInterval": 1000 },
+  { "initialX": 400, "initialY": 200, "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 1, "spawnInterval": 1000 },
+  { "initialX": 300, "initialY": 400, "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 1, "spawnInterval": 1000 },
+  { "initialX": "width - 100", "initialY": "height - 100", "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 1, "spawnInterval": 1000 },
+  { "initialX": "width - 100", "initialY": 100, "targetX": "width / 2", "targetY": 0, "numberOfEnemies": 1, "spawnInterval": 1000 },
+  { "initialX": "width - 100", "initialY": "height - 100", "targetX": "width / 2", "targetY": "height", "numberOfEnemies": 1, "spawnInterval": 1000 },
+  { "initialX": 0, "initialY": "height / 2", "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 2, "spawnInterval": 1500 },
+  { "initialX": "width / 2", "initialY": 0, "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 3, "spawnInterval": 2000 },
+  { "initialX": "width / 2", "initialY": "height", "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 3, "spawnInterval": 2000 },
+
+  { "initialX": 300, "initialY": 0, "targetX": "width / 2", "targetY": "height / 2", "numberOfEnemies": 2, "spawnInterval": 1500 },
+  { "initialX": "width / 2", "initialY": "height / 2", "targetX": 0, "targetY": "height / 2", "numberOfEnemies": 3, "spawnInterval": 2000 }
+]
