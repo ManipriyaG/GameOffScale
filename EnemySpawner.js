@@ -13,7 +13,7 @@ class EnemySpawning {
       const config = this.spawnConfigurations[this.currentConfigIndex];
     
       // Check if the current time matches the spawn time for this configuration
-      if (currentTime / 1000 >= config.spawnTime && this.currentConfigIndex < spawnConfigurations.Length) {
+      if (currentTime / 1000 >= config.spawnTime) {
         // Spawn the specified number of enemies at the specified location with the target
         this.enemySystem.spawnEnemies(
           config.initialX,
@@ -26,7 +26,7 @@ class EnemySpawning {
         console.log(`Enemies spawned at ${currentTime / 1000} seconds!`);
     
         this.lastSpawnTime = currentTime;
-        this.currentConfigIndex = this.currentConfigIndex + 1;
+        this.currentConfigIndex = (this.currentConfigIndex + 1) % this.spawnConfigurations.length;
       } else {
         console.log(`Waiting for spawn time (${config.spawnTime} seconds)...`);
       }

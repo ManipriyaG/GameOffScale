@@ -23,6 +23,7 @@ let width = (canvas.width = window.innerWidth);
   .then(response => response.json())
   .then(spawnConfigurations => {
     console.log('Spawn configurations loaded:', spawnConfigurations);
+    spawnConfigurations.sort((a, b) => a.spawnTime - b.spawnTime);
     spawnConfigurations.forEach(config => {
       config.targetX = width / 2;
       config.targetY = height / 2;
@@ -50,7 +51,7 @@ const gun2 = new Gun(width / 2 + 25, height / 2, guns[1].speed, guns[1].bulletSi
       gameTimer += 1 / 60; // Assuming 60 frames per second
 
       // Check if the countdown has finished
-      if (gameTimer >= 1) {
+      if (gameTimer >= 0) {
         gameStarted = true;
         console.log("Game started!");
         gameTimer = 0; // Reset the timer
