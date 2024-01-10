@@ -1,36 +1,42 @@
 class EnemySpawning {
-    constructor(enemySystem, spawnConfigurations) {
-      this.enemySystem = enemySystem;
-      this.spawnConfigurations = spawnConfigurations;
-      this.currentConfigIndex = 0;
-      this.lastSpawnTime = 0;
-    }
-  
-    update() {
-      const currentTime = new Date().getTime();
-    
-      // Check if it's time to spawn a new set of enemies based on the current configuration
-      const config = this.spawnConfigurations[this.currentConfigIndex];
-    
-      // Check if the current time matches the spawn time for this configuration
-      if (currentTime / 1000 >= config.spawnTime) {
-        // Spawn the specified number of enemies at the specified location with the target
-        this.enemySystem.spawnEnemies(
-          config.initialX,
-          config.initialY,
-          config.targetX,
-          config.targetY,
-          config.numberOfEnemies
-        );
-    
-        console.log(`Enemies spawned at ${currentTime / 1000} seconds!`);
-    
-        this.lastSpawnTime = currentTime;
-        this.currentConfigIndex = (this.currentConfigIndex + 1) % this.spawnConfigurations.length;
-      } else {
-        console.log(`Waiting for spawn time (${config.spawnTime} seconds)...`);
-      }
-    }
-    
+  constructor(enemySystem, spawnConfigurations) {
+    this.enemySystem = enemySystem;
+    this.spawnConfigurations = spawnConfigurations;
+    this.currentConfigIndex = 0;
+    this.lastSpawnTime = 0;
+    this.enemiesSpawned = [];
   }
-  
+
+  update(gameTimer) {
+    if (this.currentConfigIndex >= this.spawnConfigurations.length) {
+      // All configurations have been processed, no need to continue
+      return;
+    }
+
+    const config = this.spawnConfigurations[this.currentConfigIndex];
+
+    if (gameTimer >= config.spawnTime && this.enemiesSpawned.length < config.numberOfEnemies) {
+      const remainingEnemies = config.numberOfEnemies - this.enemiesSpawned.length;
+
+      // Spawn remaining enemies for the current configuration
+      const newEnemies = this.enemySystem.spawnEnemies(
+        config.initialX,
+        config.initialY,
+        config.targetX,
+        config.targetY,
+        remainingEnemies
+      );
+
+      // Add the newly spawned enemies to the list
+      this.enemiesSpawned.push(...newEnemies);
+
+      if (this.enemiesSpawned.length >= config.numberOfEnemies) {
+        // Move to the next configuration
+        this.currentConfigIndex++;
+        this.enemiesSpawned = [];
+      }
+
+      this.lastSpawnTime = gameTimer;
+    }
+  }
+}

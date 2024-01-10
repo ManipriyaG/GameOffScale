@@ -1,6 +1,8 @@
 let gameTimer = 0; // Game timer in seconds
 let gameStarted = false;
 let currentGun = 1; // Initial gun
+let startTime;
+
 const guns = [
   { speed: 50, bulletSize: 10 }, // Gun 1 properties
   { speed: 30, bulletSize: 6 }  // Gun 2 properties
@@ -47,8 +49,12 @@ const gun2 = new Gun(width / 2 + 25, height / 2, guns[1].speed, guns[1].bulletSi
 
     // Check if the game has started
     if (!gameStarted) {
+      if (!startTime) {
+        startTime = performance.now();
+      }
+      gameTimer = (performance.now() - startTime) / 1000;
       // Update the game timer
-      gameTimer += 1 / 60; // Assuming 60 frames per second
+      // gameTimer += 1 / 60; // Assuming 60 frames per second
 
       // Check if the countdown has finished
       if (gameTimer >= 0) {
@@ -71,10 +77,13 @@ const gun2 = new Gun(width / 2 + 25, height / 2, guns[1].speed, guns[1].bulletSi
       CollisionSystem.checkCollisions(particleSystem, enemySystem);
 
       // Spawn enemies based on the timer
-      enemySpawner.update();
+      // enemySpawner.update();
 
       // Update the game timer
-      gameTimer += 1 / 60; // Assuming 60 frames per second
+      // gameTimer += 1 / 60; // Assuming 60 frames per second
+      gameTimer = (performance.now() - startTime) / 1000;
+      enemySpawner.update(gameTimer)
+      
     }
 
     requestAnimationFrame(update);
