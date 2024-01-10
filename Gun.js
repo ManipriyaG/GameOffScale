@@ -8,10 +8,10 @@ class Gun {
     }
 
     draw(context) {
-      context.beginPath();
-      context.arc(this.x, this.y, 10, 0, Math.PI * 2, false);
-      context.fillStyle = this.color;
-      context.fill();
+      // context.beginPath();
+      // context.arc(this.x, this.y, 10, 0, Math.PI * 2, false);
+      // context.fillStyle = this.color;
+      // context.fill();
     }
 
     updatePosition(newX, newY) {
