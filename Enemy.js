@@ -3,6 +3,7 @@ class Enemy extends Particle {
       super(radius, initialX, initialY);
       this.target = new Vector2(targetX, targetY);
       this.speed = 2;
+      this.healthData = new HealthData(100);
     }
   
     update() {

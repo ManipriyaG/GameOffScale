@@ -69,7 +69,37 @@ window.onload = function () {
       line.update(mouseX, mouseY);
       particleSystem.update(width, height);
       enemySystem.update(width, height);
-      CollisionSystem.checkCollisions(particleSystem, enemySystem);
+      //CollisionSystem.checkCollisions(particleSystem, enemySystem);
+      for (let i = enemySystem.enemies.length - 1; i >= 0; i--) {
+        const enemy = enemySystem.enemies[i];
+
+        //checking enemy and bullet collision
+        for (let j = particleSystem.particles.length - 1; j >= 0; j--) {
+          const particle = particleSystem.particles[j];
+           if(CollisionSystem.IsColliding(particle.position, particle.radius, enemy.position, enemy.radius))
+           {
+             let damage = 50; //TODO: calculate proper damage
+              //reduce health of enemy
+              enemy.healthData.ReduceHealth(damage);
+              console.log("health is "+enemy.healthData.health);
+            }
+        }
+          if(!enemy.healthData.IsAlive())
+          {
+            enemySystem.enemies.splice(i, 1);
+            continue;
+          }
+          
+        if(CollisionSystem.IsColliding(enemy.position, enemy.radius, player.position, player.radius ))
+        {
+          let damage = 50; //TODO: calculate proper damage
+          //reduce health of player
+          player.healthData.ReduceHealth(damage);
+          
+        }
+      }
+
+
 
       player.draw(context);
       gun1.draw(context);

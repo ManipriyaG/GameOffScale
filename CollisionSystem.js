@@ -19,6 +19,20 @@ class CollisionSystem {
         }
       }
     }
+
+    static IsColliding(position1, radius1, position2, radius2)
+    {
+      // Check if the distance between particle and enemy is less than the sum of their radii
+      const distance = Math.sqrt(
+        Math.pow(position1.getX() -position2.getX(), 2) +
+        Math.pow(position1.getY() - position2.getY(), 2)
+      );
+
+      if (distance < radius1 + radius2) {
+        return true;
+      }
+      return false;
+    }
   }
   
   

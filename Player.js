@@ -7,6 +7,9 @@ class Player {
       // this.color = color;
       this.x = (canvasWidth / 2)- (this.width/2) ;
       this.y = (canvasHeight / 2) - (this.height/2) ;
+      this.healthData = new HealthData(100);
+      this.position = new Vector2(this.x,this.y);
+      this.radius = 32;
     }
   
     draw(context) {
