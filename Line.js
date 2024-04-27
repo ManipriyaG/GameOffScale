@@ -1,7 +1,7 @@
   class Line {
     constructor(y, length) {
-      this.startPoint = new Vector2((canvas.width - length) / 2, y); //calculating x-co-ordinate for the starting point
-      this.endPoint = new Vector2((canvas.width + length) / 2, y); //calculating y-co-ordinate for the starting point
+      this.startPoint = new Vector2(canvas.width/2, y); //calculating x-co-ordinate for the starting point
+      this.endPoint = new Vector2((canvas.width/2 + length), y); //calculating y-co-ordinate for the starting point
       this.angle = 0;
     }
   

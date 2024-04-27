@@ -11,8 +11,9 @@ window.onload = function () {
   let canvas = document.getElementById("canvas");
   let context = canvas.getContext("2d");
   
-let width = (canvas.width = window.innerWidth);
+  let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
+  console.log("width : "+width +" height : "+height);
   let mouseX = 0;
   let mouseY = 0;
   let lineY = height / 2;
@@ -33,7 +34,7 @@ let width = (canvas.width = window.innerWidth);
     const enemySpawner = new EnemySpawning(enemySystem, spawnConfigurations);
 
   const playerImage = "./assets/player.png";
-  const player = new Player(50, 50, playerImage, width, height);
+  const player = new Player(64, 64, playerImage, width, height);
   // const player = new Player(50, 50, "yellow", width, height);
   const gun1 = new Gun(width / 2, height / 2, guns[0].speed, guns[0].bulletSize, "green");
   const gun2 = new Gun(width / 2, height / 2, guns[1].speed, guns[1].bulletSize, "blue");
