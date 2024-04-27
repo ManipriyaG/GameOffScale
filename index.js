@@ -35,8 +35,8 @@ let width = (canvas.width = window.innerWidth);
   const playerImage = "./assets/player.png";
   const player = new Player(50, 50, playerImage, width, height);
   // const player = new Player(50, 50, "yellow", width, height);
-  const gun1 = new Gun(width / 2 - 25, height / 2, guns[0].speed, guns[0].bulletSize, "green");
-const gun2 = new Gun(width / 2 + 25, height / 2, guns[1].speed, guns[1].bulletSize, "blue");
+  const gun1 = new Gun(width / 2, height / 2, guns[0].speed, guns[0].bulletSize, "green");
+  const gun2 = new Gun(width / 2, height / 2, guns[1].speed, guns[1].bulletSize, "blue");
 
   
 
@@ -65,16 +65,17 @@ const gun2 = new Gun(width / 2 + 25, height / 2, guns[1].speed, guns[1].bulletSi
     } else {
       // Game has started, update the game logic
 
+      line.update(mouseX, mouseY);
+      particleSystem.update(width, height);
+      enemySystem.update(width, height);
+      CollisionSystem.checkCollisions(particleSystem, enemySystem);
+
       player.draw(context);
       gun1.draw(context);
       gun2.draw(context);
-      line.update(mouseX, mouseY);
       particleSystem.draw(context);
-      particleSystem.update(width, height);
-      enemySystem.update(width, height);
       enemySystem.draw(context);
       line.draw(context);
-      CollisionSystem.checkCollisions(particleSystem, enemySystem);
 
       // Spawn enemies based on the timer
       // enemySpawner.update();
@@ -102,12 +103,10 @@ const gun2 = new Gun(width / 2 + 25, height / 2, guns[1].speed, guns[1].bulletSi
   window.addEventListener("mousedown", function (event) {
     const angle = Math.atan2(event.clientY - height / 2, event.clientX - width / 2);
 
-    const gunPosition = currentGun === 1 ? { x: width / 2 - 50, y: height / 2 } : { x: width / 2 + 50, y: height / 2 };
-
     particleSystem.emitParticle(
       guns[currentGun - 1].bulletSize,
-      gunPosition.x,
-      gunPosition.y,
+      width / 2,
+      height/2,
       Math.cos(angle) * guns[currentGun - 1].speed,
       Math.sin(angle) * guns[currentGun - 1].speed
     );
